@@ -1,0 +1,43 @@
+[TaskInfo]
+Name = ""
+Icon = ""
+Notes = ""
+RunsAgainst = "Computers / Cloud / Software (Configuration Task)"
+LimitToOnboarding = false
+ExecuteSerially = false
+AccessLevel = "Owner / Limited / All"
+Recommended = false
+SuperseededBy = ""
+
+[Integration]
+IntegrationType = ""
+
+[Parameters]
+UseScriptParamBlock = false
+
+# Remove the following parameters if using the script parameter block
+[Parameters.1]
+Name = ""
+Type = "Number / Text / Boolean / Select / Password / File / Uri / KeyValuePair"
+RequiresUserInput = false
+Hidden = false
+DefaultValue = ""
+Description = ""
+
+[Parameters.2]
+Name = ""
+Type = "Number / Text / Boolean / Select / Password / File / Uri / KeyValuePair"
+RequiresUserInput = false
+Hidden = false
+DefaultValue = ""
+Description = ""
+
+[Scripts]
+UseCombinedScript = true
+[Scripts.CombinedScript]
+Script = ""
+
+[Scripts.SeparateScripts]
+TestScript = ""
+GetScript = ""
+SetScript = ""

@@ -1,0 +1,88 @@
+[SoftwareInfo]
+Name = "Senteon Agent"
+Icon = "Senteon.jpg" # Use the Senteon.jpg file
+Notes = '''Senteon Agent is a small program installed on each endpoint. It performs actions, monitors, and communicates back to the Senteon App Server. 
+Reference: https://senteon.readthedocs.io/en/latest/'''
+"Reboot Required" = false
+Recommended = false
+
+[Licensing]
+Setting = "None"
+
+[VersionDetection]
+"Detection Method" = "Display Name"
+
+[VersionDetection.DisplayName]
+"Search Mode" = "Contains"
+"Search Filter" = "Senteon Agent"
+
+[Installation]
+Script = "Senteon Agent Installation Script" # Use the Install-SenteonAgent.ps1 script
+
+[InstallationPrerequisites]
+Software = {}
+
+[Uninstallation]
+Script = "Senteon Agent Uninstallation Script" # Use the Uninstall-SenteonAgent.ps1 script
+
+[UpgradeStrategy]
+"Upgrade Strategy" = "Install Over"
+
+[ConfigurationTask]
+[ConfigurationTask.TaskInfo]
+Name = "Senteon Agent Configuration Task"
+Icon = "Senteon.jpg" # Use the Senteon.jpg file
+Notes = "To provide the command line parameters to the 'Seneton Agent Installation Script'"
+"Execute serially" = false
+"Access Level" = "All"
+Recommended = false
+"Superseded By" = {}
+
+[ConfigurationTask.Integration]
+"Integration Type" = {}
+
+[ConfigurationTask.Parameters]
+"Use Script Param Block" = false
+
+[ConfigurationTask.Parameters.Organization]
+Name = "Organization"
+"Data Type" = "Text"
+"Requires User Input" = true
+Hidden = false
+"Default Value" = {}
+Description = "Organization ID"
+
+[ConfigurationTask.Parameters.Tenant]
+Name = "Tenant"
+"Data Type" = "Text"
+"Requires User Input" = true
+Hidden = false
+"Default Value" = {}
+Description = "Tenant ID"
+
+[ConfigurationTask.Parameters.RegistrationCode]
+Name = "RegistrationCode"
+"Data Type" = "Text"
+"Requires User Input" = true
+Hidden = false
+"Default Value" = {}
+Description = {}
+
+[ConfigurationTask.Parameters.AutoEval]
+Name = "AutoEval"
+"Data Type" = "Boolean"
+"Requires User Input" = true
+Hidden = false
+"Default Value" = "No Value"
+Description = {}
+
+[ConfigurationTask.Scripts]
+"Use Separate scripts" = true
+Test = "Disabled"
+Get = "Disabled"
+Set = "Disabled"
+
+[AdvancedSettings]
+[AdvancedSettings.DynamicVersions]
+"Use dynamic versions" = true
+"Dynamic Version Script" = "Senteon Agent Dynamic Versions Script" # Use the Get-SenteonAgentDynamicVersion.ps1 script

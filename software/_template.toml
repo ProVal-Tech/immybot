@@ -1,0 +1,140 @@
+[Installer]
+InstallerType = "None / Upload / URL"
+
+[Installer.Upload]
+InstallerFile = ""
+PackageType = "Zip file / Single file installer"
+
+[Installer.Upload.ZipFile]
+InstallerExecutablePath = ""
+PackageHash = ""
+
+[Installer.Upload.SingleFileInstaller]
+InstallerFile = ""
+PackageHash = ""
+
+[Installer.URL]
+InstallerURL = ""
+PackageType = "Zip file / Single file installer"
+
+[Installer.URL.ZipFile]
+InstallerExecutablePath = ""
+PackageHash = ""
+
+[Installer.URL.SingleFileInstaller]
+InstallerFile = ""
+PackageHash = ""
+
+[SoftwareInfo]
+Name = ""
+Icon = ""
+Notes = ""
+RebootRequired = false
+Recommended = false
+
+[Licensing]
+Setting = "None / Required / Optional"
+
+[Licensing.Required]
+LicenseType = "Key / LicenseFile"
+Description = ""
+
+[Licensing.Optional]
+LicenseType = "None / Key / LicenseFile"
+Description = ""
+
+[VersionDetection]
+DetectionMethod = "Display Name / Upgrade Code / Custom Detection Script"
+
+[VersionDetection.DisplayName]
+SearchMode = "Contains / Regex / Traditional"
+SearchFilter = ""
+
+[VersionDetection.UpgradeCode]
+UpgradeCode = ""
+
+[VersionDetection.CustomDetectionScript]
+CustomDetectionScript = ""
+
+[Installation]
+Script = ""
+
+[InstallationPrerequisites]
+
+[InstallationPrerequisites.Software.1]
+Software = ""
+Is = "Installed / Not Installed"
+
+[InstallationPrerequisites.Software.1.Installed]
+Then = "Install / Uninstall / Fail"
+
+[InstallationPrerequisites.Software.1.Installed.Install]
+Software = ""
+
+[InstallationPrerequisites.Software.1.Installed.Uninstall]
+Software = ""
+
+[InstallationPrerequisites.Software.1.NotInstalled]
+Then = "Install / Fail"
+
+[InstallationPrerequisites.Software.1.NotInstalled.Install]
+Software = ""
+
+# [InstallationPrerequisites.Software.2]
+# ...
+
+[Uninstallation]
+Script = ""
+
+[UpgradeStrategy]
+UpgradeStrategy = "None / Uninstall/Install / Install Over / Upgrade Script"
+
+[UpgradeStrategy.UpgradeScript]
+Script = ""
+
+[ConfigurationTask]
+Script = ""
+
+[DynamicVersions]
+UseDynamicVersions = false
+
+[DynamicVersions.UsingDynamicVersions]
+Script = ""
+
+[AgentIntegration]
+AgentIntegration = ""
+
+[RepairStrategy]
+RepairStrategy = "None / Uninstall/Install / Install Over / Custom Script"
+
+[RepairStrategy.CustomScript]
+Script = ""
+
+[SoftwareAccessLevel]
+AccessLevel = "Owner / Limited / All"
+
+[Hidden]
+Hidden = false
+
+[PostInstallation]
+Script = ""
+
+[PostUninstallation]
+Script = ""
+
+[Testing]
+TestRequired = false
+
+[Testing.TestsRequired]
+TestFailedError = ""
+TestScript = ""
+
+[AutoUpdate]
+Script = ""
+
+[DownloadInstaller]
+Script = ""
+
+[AlternativeProviders]
+ChocolateySoftware = ""
+NiniteSoftware = ""

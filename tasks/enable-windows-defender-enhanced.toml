@@ -1,0 +1,19 @@
+[TaskInfo]
+Name = "Enable Windows Defender (Enhanced)"
+Notes = "Based on https://support.huntress.io/hc/en-us/articles/4402989131283-Enable-Microsoft-Defender-via-PowerShell"
+RunsAgainst = "Computers"
+LimitToOnboarding = false
+ExecuteSerially = false
+AccessLevel = "All"
+Reccomended = false
+SuperseededBy = {}
+
+[Integration]
+IntegrationType = {}
+
+[Parameters]
+UseScriptParamBlock = false
+
+[Scripts]
+UseCombinedScript = true
+Script = "Combined Script" # Use the CombinedScript.ps1 script

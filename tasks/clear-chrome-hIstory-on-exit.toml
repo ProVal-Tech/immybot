@@ -1,0 +1,19 @@
+[TaskInfo]
+Name = "Clear Google Chrome History, Cache, and Cookies on exit"
+Notes = "The script enables Google Chrome's settings to clear the history, cache, and cookies when exiting."
+RunsAgainst = "Computers"
+LimitToOnboarding = false
+ExecuteSerially = false
+AccessLevel = "All"
+Reccomended = false
+SuperseededBy = {}
+
+[Integration]
+IntegrationType = {}
+
+[Parameters]
+UseScriptParamBlock = false
+
+[Scripts]
+UseCombinedScript = true
+Script = "Clear Google Chrome History, Cache, and Cookies on exit Combined Script" # Use the Clear-ChromeHistoryOnExit.ps1 script

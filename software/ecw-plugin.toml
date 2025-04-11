@@ -1,0 +1,30 @@
+[Installer]
+InstallerType = "Upload a file"
+# Click "Select a file" and upload the eCWPlugin.msi file
+PackageType = "Single file installer"
+InstallerFile = "eCWPlugin.msi"
+PackageHash = "A744D60222E22E8FA4450C1F2A699E09"
+
+[Software]
+    [Software.SoftwareInfo]
+    Name = "eCW Plugin"
+    Icon = "logo.png"
+    RebootRequired = false
+    Reccomended = false
+    
+    [Software.Licensing]
+    Setting = "None"
+    
+    [Software.VersionDetection]
+    DetectionMethod = "UpgradeCode"
+    UpgradeCode = "ffd73644-0ff8-467e-9e4f-d3cd3ec41bdc"
+
+    [Software.Scripts]
+    Installation.Script = "Default MSI Install"
+    Uninstallation.Script = "Uninstall MSI by UpgradeCode"
+    UpgradeStrategy = "Install Over"
+
+[Version]
+DisplayName = "eCW Plugin"
+VersionString = "5.9.2409"
+ProductCode = "8a18f669-432c-4011-bec1-1308f38e3084"

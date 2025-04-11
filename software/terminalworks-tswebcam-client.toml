@@ -1,0 +1,32 @@
+[Installer]
+    InstallerType = "Paste a URL"
+    InstallerURL = "https://www.terminalworks.com/downloads/tswebcampro/msi/TSWebCam.msi"
+    PackageType = "Single file installer"
+    InstallerFile = "TSWebCam.msi"
+
+[Software]
+    [Software.SoftwareInfo]
+    Name = "TerminalWorks TSWebcam Client"
+    Icon = "TSWebcam.png"
+    Notes = "TSWebCam is a better way to redirect your local DirectShow cameras into the remote session. This way you avoid installing any drivers on the server side."
+    RebootRequired = false
+    Reccomended = false
+
+    [Software.Licensing]
+    Setting = "None"
+
+    [Software.VersionDetection]
+    DetectionMethod = "DisplayName"
+
+        [Software.VersionDetection.DisplayName]
+        SearchMode = "Contains"
+        SearchFilter = "TSWebCam"
+
+    [Software.Scripts]
+    Installation.Script = "Default MSI Install"
+    Uninstallation.Script = "Uninstall MSI by UpgradeCode"
+    UpgradeStrategy = "Install Over"
+
+    [Software.AdvancedSettings]
+    DynamicVersions.Enabled = true
+    DynamicVersions.Script = "TerminalWorks TSWebcam Client Dynamic Versions Script" # DynamicVersions.ps1
