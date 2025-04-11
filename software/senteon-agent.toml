@@ -17,13 +17,13 @@ Setting = "None"
 "Search Filter" = "Senteon Agent"
 
 [Installation]
-Script = "Senteon Agent Installation Script" # Use the Install-SenteonAgent.ps1 script
+Script = "senteon-agent-install.ps1"
 
 [InstallationPrerequisites]
 Software = {}
 
 [Uninstallation]
-Script = "Senteon Agent Uninstallation Script" # Use the Uninstall-SenteonAgent.ps1 script
+Script = "senteon-agent-uninstall.ps1"
 
 [UpgradeStrategy]
 "Upgrade Strategy" = "Install Over"

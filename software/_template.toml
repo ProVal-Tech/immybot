@@ -93,7 +93,7 @@ UpgradeStrategy = "None / Uninstall/Install / Install Over / Upgrade Script"
 Script = ""
 
 [ConfigurationTask]
-Script = ""
+Task = ""
 
 [DynamicVersions]
 UseDynamicVersions = false
