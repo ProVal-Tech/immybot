@@ -96,6 +96,14 @@ This script automates the process of applying security policies to browsers inst
 - If the `RemoveSavedPassword` parameter is set to `$true`, browsers will be forcefully closed to delete saved passwords.
 - The `DisableEdgeWallet` parameter must be set to `$true` to remove saved passwords from Microsoft Edge.
 
+**ImmyBot Script Details:** 
+
+- Name: lockdown-browsers-autofill-and-password-manager
+- Type: Task
+- ExecutionContext: Metascript
+- Language: PowerShell
+- OverrideTimeout: false
+- AccessLevel: All
 #>
 
 # Parameters
