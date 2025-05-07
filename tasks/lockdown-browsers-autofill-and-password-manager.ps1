@@ -135,14 +135,21 @@ param (
     [bool]$DisableEdgeWallet = $false
 )
 
-# Global Variables
-# This section initializes variables used throughout the script:
-# - `$projectName`: The name of the project, used to organize files and logs.
-# - `$workingDirectory`: The directory where temporary files and logs will be stored.
-# - `$logFilePath`: The path to the log file where the script logs its operations and results.
-$projectName = 'Set-BrowserSecPolicy'
-$workingDirectory = 'C:\ProgramData\_automation\Script\{0}' -f $projectName
-$logFilePath = '{0}\{1}-log.txt' -f $workingDirectory, $projectName
+# Initialize Browser List
+# This section initializes the `$Browser` variable based on the input parameter.
+# If the `Browser` parameter is set to `All`, it assigns a list of all supported browsers (`Chrome`, `Edge`, `Brave`, `Firefox`) to the `$Browser` variable.
+# Otherwise, it uses the value provided in the `Browser` parameter.
+
+if ($Browser -eq 'All') {
+    $Browser = @('Chrome', 'Edge', 'Brave', 'Firefox')
+}
+
+# Set Parameter to Variables
+$DisablePasswordManager = $DisablePasswordManager
+$DisableAutofillAddress = $DisableAutofillAddress
+$DisableAutofillCreditCard = $DisableAutofillCreditCard
+$RemoveSavedPassword = $RemoveSavedPassword
+$DisableEdgeWallet = $DisableEdgeWallet
 
 # ImmyBot Implementation
 # This section implements the logic for the ImmyBot automation framework. It uses a `switch` statement to handle different methods (`Get`, `Test`, and `Set`):
@@ -151,29 +158,283 @@ $logFilePath = '{0}\{1}-log.txt' -f $workingDirectory, $projectName
 # - `Set`: Executes the main logic of the script, including applying security policies to the specified browsers.
 switch ($method) {
     # Get Switch
-    # Check for the presence of working directory
+    # This section contains the logic for checking the presence of the specified browsers on the system.
+    # It includes a function to:
+    # - Determine if a browser is installed (`Find-Application`) by searching the Windows registry.
+    # The script iterates through the list of specified browsers and checks their installation status.
+    # For each browser, it logs whether the application is installed or not.
+    # This block does not modify any settings or configurations; it is purely informational.
     'Get' {
         Invoke-ImmyCommand -ScriptBlock {
-            Test-Path -Path $using:workingDirectory
+            #Function to check if the application is installed
+            function Find-Application {
+                <#
+                .SYNOPSIS
+                Checks if a specified application is installed on the system.
+
+                .DESCRIPTION
+                The `Find-Application` function searches the Windows registry to determine if a specified application is installed by examining both 32-bit and 64-bit uninstall registry paths.
+
+                .PARAMETER Name
+                The name of the application to search for.
+
+                .OUTPUTS
+                Returns `$true` if the application is installed.
+                Returns `$false` if the application is not installed.
+
+                .EXAMPLE
+                # Example 1: Check if Google Chrome is installed
+                Find-Application -Name 'Google Chrome'
+
+                .EXAMPLE
+                # Example 2: Check if Mozilla Firefox is installed
+                Find-Application -Name 'Mozilla Firefox'
+                #>
+                Param(
+                    [Parameter(Mandatory)]
+                    [String]$Name
+                )
+                $uninstallPaths = @(
+                    'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall',
+                    'HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall'
+                )
+                if (Get-ChildItem -Path $uninstallPaths | Get-ItemProperty | Where-Object { $_.DisplayName -match "$Name" }) {
+                    return $app
+                } else {
+                    return $false
+                }
+            }
+
+            # Output the installation status for each specified browser
+            foreach ($app in $using:Browser) {
+                Find-Application -Name $app
+            }
         }
     }
     # Test Switch
-    # This section checks the log file to determine the success or failure of the last operation.
-    # If the log file contains the word "Success," it returns `$true`.
-    # If the log file contains any other content or does not exist, it returns `$false`.
-    # This is useful for verifying the outcome of the previous execution of the script.
+    # This section contains the logic for verifying the compliance of the specified browsers with the desired security policies.
+    # It includes functions to:
+    # - Check if a browser is installed (`Find-Application`).
+    # - Retrieve registry values (`Get-RegValue`) to verify settings.
+    # - Validate browser configurations such as disabling password managers, autofill features, and saved password data.
+    # - Check for the presence of saved passwords in browser profiles.
+    # The script iterates through the specified browsers and evaluates their settings against the desired configuration.
+    # Any non-compliant browsers are added to the `$test` array, which is used to determine the overall compliance status.
+    # The block returns `$true` if all browsers are compliant, or `$false` if any browser requires remediation.
     'Test' {
         Invoke-ImmyCommand -ScriptBlock {
-            if (Test-Path -Path $using:logFilePath) {
-                $content = Get-Content -Path $using:logFilePath -ErrorAction SilentlyContinue
-                Remove-Item -Path $using:logFilePath -Force -Confirm:$false -ErrorAction SilentlyContinue
-                if ($content -match 'Success') {
+            # Function to determine if an application is installed on the system
+            function Find-Application {
+                <#
+                .SYNOPSIS
+                Checks if a specified application is installed on the system.
+
+                .DESCRIPTION
+                The `Find-Application` function searches the Windows registry to determine if a specified application is installed by examining both 32-bit and 64-bit uninstall registry paths.
+
+                .PARAMETER Name
+                The name of the application to search for.
+
+                .OUTPUTS
+                Returns `$true` if the application is installed.
+                Returns `$false` if the application is not installed.
+
+                .EXAMPLE
+                # Example 1: Check if Google Chrome is installed
+                Find-Application -Name 'Google Chrome'
+
+                .EXAMPLE
+                # Example 2: Check if Mozilla Firefox is installed
+                Find-Application -Name 'Mozilla Firefox'
+                #>
+                Param(
+                    [Parameter(Mandatory)]
+                    [String]$Name
+                )
+                $uninstallPaths = @(
+                    'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall',
+                    'HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall'
+                )
+                if (Get-ChildItem -Path $uninstallPaths | Get-ItemProperty | Where-Object { $_.DisplayName -match "$Name" }) {
                     return $true
                 } else {
                     return $false
                 }
-            } else {
+            }
+
+            # Function to retrieve the data of a specified registry value
+            function Get-RegValue {
+                <#
+                .SYNOPSIS
+                Retrieves the data of a specified registry value.
+
+                .DESCRIPTION
+                The `Get-RegValue` function retrieves the data of a specified registry value from the Windows registry. If the value does not exist or the key path is invalid, it returns `$null`.
+
+                .PARAMETER path
+                The registry key path to query.
+
+                .PARAMETER Reg
+                The name of the registry value to retrieve.
+
+                .OUTPUTS
+                Returns the data of the specified registry value.
+                Returns `$null` if the value does not exist or the key path is invalid.
+
+                .EXAMPLE
+                # Example 1: Retrieve the data of a registry value
+                Get-RegValue -path 'HKLM:\Software\Policies\Google\Chrome' -Reg 'PasswordManagerEnabled'
+                #>
+                Param(
+                    [Parameter(Mandatory)]
+                    [String]$path,
+                    [Parameter(Mandatory)]
+                    [String]$Reg
+                )
+                try {
+                    return (Get-ItemProperty -Path $path -ErrorAction Stop)."$Reg"
+                } catch {
+                    return $null
+                }
+            }
+
+            # Initialize an array to track browsers that do not meet the desired configuration
+            $test = @()
+            $Browser = $using:Browser
+
+            # Verify Browser Security Settings
+            # This section iterates through the specified browsers and verifies their security settings against the desired configuration.
+            # It checks settings related to password managers, autofill for addresses, autofill for credit card details, and saved password data
+            # by examining the appropriate registry keys and file paths for each browser.
+            # Only browsers installed on the system, as confirmed by the `Find-Application` function, are evaluated.
+            # Browsers that do not comply with the desired settings are added to the `$test` array.
+            foreach ($app in $Browser) {
+                # Configure Browser-Specific Settings
+                # This section assigns the registry path, application name, process name, and profile path based on the current browser.
+                # A `switch` statement determines these values for supported browsers (e.g., Chrome, Edge, Brave, Firefox) to facilitate subsequent checks.
+                switch ($app) {
+                    'Chrome' {
+                        $regPath = 'HKLM:\Software\Policies\Google\Chrome'
+                        $appName = 'Google Chrome'
+                        $profilePath = 'AppData\Local\Google\Chrome'
+                    }
+                    'Edge' {
+                        $regPath = 'HKLM:\Software\Policies\Microsoft\Edge'
+                        $appName = 'Microsoft Edge'
+                        $profilePath = 'AppData\Local\Microsoft\Edge'
+                    }
+                    'Brave' {
+                        $regPath = 'HKLM:\SOFTWARE\Policies\BraveSoftware\Brave'
+                        $appName = 'Brave'
+                        $profilePath = 'AppData\Local\BraveSoftware\Brave-Browser'
+                    }
+                    'Firefox' {
+                        $regPath = 'HKLM:\Software\Policies\Mozilla\Firefox'
+                        $appName = 'Mozilla Firefox'
+                        $profilePath = 'AppData\Roaming\Mozilla\Firefox\Profiles'
+                    }
+                }
+
+                # Verify Browser Installation
+                # This section confirms whether the specified browser is installed on the system using the `Find-Application` function.
+                # If the browser is not installed, further checks for that browser are skipped.
+                if (Find-Application -Name $appName) {
+
+                    # Verify Password Manager is Disabled
+                    # If the `DisablePasswordManager` flag is `$true`, this section checks whether the 'PasswordManagerEnabled' registry value
+                    # is set to 0 (disabled). If it is not, the browser is added to the `$test` array, indicating remediation is required.
+                    if ($using:DisablePasswordManager -eq $true) {
+                        $reg = 'PasswordManagerEnabled'
+                        $Value = 0
+                        if ((Get-RegValue -path $regPath -Reg $reg) -ne $Value) {
+                            $test += $app
+                        }
+                    }
+
+                    # Verify Autofill for Addresses is Disabled in Chromium-Based Browsers
+                    # If the `DisableAutofillAddress` flag is `$true`, this section checks whether the 'AutofillAddressEnabled' registry value
+                    # is set to 0 (disabled) for Chromium-based browsers (excluding Firefox). Non-compliant browsers are added to the `$test` array.
+                    if ($using:DisableAutofillAddress -eq $true -and $app -ne 'Firefox') {
+                        $Value = 0
+                        $reg = 'AutofillAddressEnabled'
+                        if ((Get-RegValue -path $regPath -Reg $reg) -ne $Value) {
+                            $test += $app
+                        }
+                    }
+
+                    # Verify Autofill for Credit Cards is Disabled in Chromium-Based Browsers
+                    # If the `DisableAutofillCreditCard` flag is `$true`, this section checks whether the 'AutofillCreditCardEnabled' and
+                    # 'PaymentMethodQueryEnabled' registry values are set to 0 (disabled) for Chromium-based browsers (excluding Firefox).
+                    # Non-compliant browsers are added to the `$test` array.
+                    if ($using:DisableAutofillCreditCard -eq $true -and $app -ne 'Firefox') {
+                        $Value = 0
+                        foreach ($reg in 'AutofillCreditCardEnabled', 'PaymentMethodQueryEnabled') {
+                            if ((Get-RegValue -path $regPath -Reg $reg) -ne $Value) {
+                                $test += $app
+                            }
+                        }
+                    }
+
+                    # Verify Edge Wallet is Disabled and Data is Removed
+                    # For Microsoft Edge, if the `DisableEdgeWallet` flag is `$true`, this section checks whether the 'SyncDisabled' registry value
+                    # is set to 1 (disabled) and verifies that the 'Edge Wallet' folder does not exist in any user profile's browser data directory.
+                    # If either condition is not met, Edge is added to the `$test` array.
+                    if ($using:DisableEdgeWallet -eq $true -and $app -eq 'Edge') {
+                        $reg = 'SyncDisabled'
+                        $Value = 1
+                        if ((Get-RegValue -path $regPath -Reg $reg) -ne $Value) {
+                            $test += $app
+                        }
+                        foreach ($path in Get-ChildItem -Path 'C:\Users' | Where-Object { $_.Mode -match 'd' }) {
+                            if (Test-Path -Path "$($path.FullName)\$profilePath") {
+                                if (Test-Path -Path "$($path.FullName)\$profilePath\User Data\Edge Wallet") {
+                                    $test += $app
+                                }
+                            }
+                        }
+                    }
+
+                    # Verify No Saved Passwords Exist in Chromium-Based Browsers
+                    # If the `RemoveSavedPassword` flag is `$true`, this section checks for the presence of 'Login Data' and 'Login Data-journal'
+                    # files in the user profile data directories of Chromium-based browsers (excluding Firefox). If found, the browser is added to the `$test` array.
+                    if ($using:RemoveSavedPassword -eq $true -and $app -ne 'Firefox') {
+                        foreach ($path in Get-ChildItem -Path 'C:\Users' | Where-Object { $_.Mode -match 'd' }) {
+                            if (Test-Path -Path "$($path.FullName)\$profilePath") {
+                                foreach ($item in ('Login Data', 'Login Data-journal')) {
+                                    if (Test-Path -Path "$($path.FullName)\$profilePath\User Data\Default\$item") {
+                                        $test += $app
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    # Verify No Saved Passwords Exist in Firefox
+                    # If the `RemoveSavedPassword` flag is `$true`, this section checks for the presence of password storage files (e.g., 'logins.json', 'signons.sqlite')
+                    # in Firefox profile directories within user profiles. If found, Firefox is added to the `$test` array.
+                    if ($using:RemoveSavedPassword -eq $true -and $app -eq 'Firefox') {
+                        foreach ($path in Get-ChildItem -Path 'C:\Users' | Where-Object { $_.Mode -match 'd' }) {
+                            if (Test-Path -Path "$($path.FullName)\$profilePath") {
+                                foreach ($profile in Get-ChildItem -Path "$($path.FullName)\$profilePath" | Where-Object { $_.Mode -match 'd' }) {
+                                    foreach ($item in ('signons.txt', 'signons2.txt', 'signons3.txt', 'signons.sqlite', 'logins.json', 'logins-backup.json')) {
+                                        if (Test-Path -Path "$($profile.FullName)\$item") {
+                                            $test += $app
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            # Return Compliance Status
+            # Returns `$false` if the `$test` array contains any items, indicating that one or more browsers are non-compliant with the desired configuration.
+            # Returns `$true` if all checked browsers comply with the desired configuration.
+            if ($test) {
                 return $false
+            } else {
+                return $true
             }
         }
     }
@@ -303,18 +564,9 @@ switch ($method) {
                 }
             }
 
+            # The `$failed` array is initialized here to track any browsers where operations fail.
             $failed = @()
-
-            # Initialize Browser List
-            # This section initializes the `$Browser` variable based on the input parameter.
-            # If the `Browser` parameter is set to `All`, it assigns a list of all supported browsers (`Chrome`, `Edge`, `Brave`, `Firefox`) to the `$Browser` variable.
-            # Otherwise, it uses the value provided in the `Browser` parameter.
-            # The `$failed` array is also initialized here to track any browsers where operations fail.
-            if ($using:Browser -eq 'All') {
-                $Browser = @('Chrome', 'Edge', 'Brave', 'Firefox')
-            } else {
-                $Browser = $using:Browser
-            }
+            $Browser = $using:Browser
 
             # Disable Password Manager and Autofill
             # This section iterates through the list of specified browsers and applies security policies.
@@ -488,17 +740,9 @@ switch ($method) {
 
             # Return Failures
             # This section checks if any operations failed during the script execution.
-            # If the directory does not exist, it creates the directory at the specified path (`$workingDirectory`).
-            # If there are failures, it writes "Failure" to the log file and throws an error listing the affected applications.
-            # If all operations are successful, it writes "Success" to the log file and logs a success message.
-            if ( -not (Test-Path -Path $using:workingDirectory) ) {
-                New-Item -Path $using:workingDirectory -ItemType Directory -Force -Confirm:$false -ErrorAction SilentlyContinue | Out-Null
-            }
             if ($failed.Count -gt 0) {
-                Set-Content -Value "Failure: The following applications encountered issues: $($failed -join ', ')" -Path $using:logFilePath -Force -Confirm:$false | Out-Null
                 throw "The following applications encountered issues: $($failed -join ', ')"
             } else {
-                Set-Content -Value 'Success' -Path $using:logFilePath -Force -Confirm:$false | Out-Null
                 Write-Information 'All operations completed successfully.' -InformationAction Continue
             }
         }
