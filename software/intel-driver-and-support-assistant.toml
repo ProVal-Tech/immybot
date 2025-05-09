@@ -1,0 +1,75 @@
+[Installer]
+InstallerType = "URL"
+
+[Installer.URL]
+InstallerURL = "https://dsadata.intel.com/installer"
+PackageType = "Single file installer"
+
+[Installer.URL.SingleFileInstaller]
+InstallerFile = "Intel-Driver-and-Support-Assistant-Installer.exe"
+PackageHash = ""
+
+[SoftwareInfo]
+Name = "Intel® Driver & Support Assistant"
+Icon = "intel-driver-and-support-assistant-logo.png"  # Use intel-driver-and-support-assistant-logo.png
+Notes = "Installs Intel® Driver & Support Assistant on Windows devices."
+RebootRequired = false
+Recommended = false
+
+[Licensing]
+Setting = "None"
+
+[VersionDetection]
+DetectionMethod = "Display Name"
+
+[VersionDetection.DisplayName]
+SearchMode = "Contains"
+SearchFilter = "Intel® Driver & Support Assistant"
+
+[Installation]
+Script = "intel-driver-and-support-assistant-install.ps1" # Use intel-driver-and-support-assistant-install.ps1
+
+[InstallationPrerequisites]
+
+[Uninstallation]
+Script = "intel-driver-and-support-assistant-uninstall.ps1" # Use intel-driver-and-support-assistant-uninstall.ps1
+
+[UpgradeStrategy]
+UpgradeStrategy = "Uninstall/Install"
+
+[DynamicVersions]
+UseDynamicVersions = true
+
+[DynamicVersions.UsingDynamicVersions]
+Script = "intel-driver-and-support-assistant-dynamic-version.ps1" # Use intel-driver-and-support-assistant-dynamic-version.ps1
+
+[AgentIntegration]
+AgentIntegration = ""
+
+[RepairStrategy]
+RepairStrategy = "Uninstall/Install"
+
+[SoftwareAccessLevel]
+AccessLevel = "All"
+
+[Hidden]
+Hidden = false
+
+[PostInstallation]
+Script = ""
+
+[PostUninstallation]
+Script = ""
+
+[Testing]
+TestRequired = false
+
+[AutoUpdate]
+Script = ""
+
+[DownloadInstaller]
+Script = ""
+
+[AlternativeProviders]
+ChocolateySoftware = ""
+NiniteSoftware = ""
