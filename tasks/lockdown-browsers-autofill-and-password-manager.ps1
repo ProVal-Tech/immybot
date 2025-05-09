@@ -142,6 +142,8 @@ param (
 
 if ($Browser -eq 'All') {
     $Browser = @('Chrome', 'Edge', 'Brave', 'Firefox')
+} else {
+   $Browser = $Browser
 }
 
 # Set Parameter to Variables
