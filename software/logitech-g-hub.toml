@@ -1,0 +1,44 @@
+[Installer]
+InstallerType = "URL"
+
+[Installer.URL]
+InstallerURL = "https://download01.logi.com/web/ftp/pub/techsupport/gaming/lghub_installer.exe"
+PackageType = "Single file installer"
+
+[SoftwareInfo]
+Name = "Logitech G HUB"
+Icon = "logitech-logo.png" # Use the logitech-logo.png file
+Notes = "Logitech G HUB is a software platform designed to control and customize Logitech G gaming devices like mice, keyboards, headsets, and speakers"
+RebootRequired = false
+Recommended = false
+
+[Licensing]
+Setting = "None"
+
+[VersionDetection]
+DetectionMethod = "Display Name"
+
+[VersionDetection.DisplayName]
+SearchMode = "Contains"
+SearchFilter = "Logitech G Hub"
+
+[Installation]
+Script = "logitech-g-hub-install.ps1"
+
+[Uninstallation]
+Script = "logitech-g-hub-uninstall.ps1"
+
+[UpgradeStrategy]
+UpgradeStrategy = "Uninstall/Install"
+
+[DynamicVersions]
+UseDynamicVersions = True
+
+[DynamicVersions.UsingDynamicVersions]
+Script = "logitech-g-hub-dynamic-version.ps1"
+
+[SoftwareAccessLevel]
+AccessLevel = "All"
+
+[Hidden]
+Hidden = false
