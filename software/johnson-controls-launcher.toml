@@ -1,0 +1,58 @@
+[Installer]
+InstallerType = "URL"
+
+[Installer.URL]
+InstallerURL = "https://www.johnsoncontrols.com/-/media/project/jci-global/johnson-controls/us-region/united-states-johnson-controls/building-automation-and-controls/metasys-launcher/launcher-windows.msi"
+PackageType = "Single file installer"
+
+[Installer.URL.ZipFile]
+InstallerExecutablePath = ""
+PackageHash = ""
+
+[Installer.URL.SingleFileInstaller]
+InstallerFile = ""
+PackageHash = ""
+
+[SoftwareInfo]
+Name = "Johnson Controls - Launcher"
+Icon = "johnson-controls-launcher-logo"  # Use johnson-controls-launcher-logo.png
+Notes = "The Johnson Controls Launcher provides you with a convenient way to access any release of the Site Management Portal (SMP) and System Configuration Tool (SCT) user interfaces. It also provides a simple method of creating bookmarks for any of your website links."
+RebootRequired = false
+Recommended = false
+
+[Licensing]
+Setting = "None"
+
+[VersionDetection]
+DetectionMethod = "Display Name"
+
+[VersionDetection.DisplayName]
+SearchMode = "Contains"
+SearchFilter = "Johnson Controls - Launcher"
+
+[Installation]
+Script = "johnson-controls-launcher-installation-script" # Use johnson-controls-launcher-installation-script.ps1
+
+[Uninstallation]
+Script = "johnson-controls-launcher-uninstallation-script" # Use johnson-controls-launcher-uninstallation-script.ps1
+
+[UpgradeStrategy]
+UpgradeStrategy = "Install Over"
+
+[DynamicVersions]
+UseDynamicVersions = true
+
+[DynamicVersions.UsingDynamicVersions]
+Script = "johnson-controls-launcher-dynamic-versions-script" # Use johnson-controls-launcher-dynamic-versions-script.ps1
+
+[RepairStrategy]
+RepairStrategy = " Uninstall/Install"
+
+[SoftwareAccessLevel]
+AccessLevel = "All"
+
+[Hidden]
+Hidden = false
+
+[Testing]
+TestRequired = false
