@@ -81,8 +81,3 @@ Description = {}
 Test = "Disabled"
 Get = "Disabled"
 Set = "Disabled"
-
-[AdvancedSettings]
-[AdvancedSettings.DynamicVersions]
-"Use dynamic versions" = true
-"Dynamic Version Script" = "Senteon Agent Dynamic Versions Script" # Use the Get-SenteonAgentDynamicVersion.ps1 script
