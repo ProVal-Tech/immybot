@@ -1,0 +1,51 @@
+[Installer]
+InstallerType = "URL"
+
+[Installer.URL]
+InstallerURL = ""
+PackageType = "Single file installer"
+
+[Installer.URL.SingleFileInstaller]
+InstallerFile = "https://us.download.nvidia.com/nvapp/client/11.0.4.159/NVIDIA_app_v11.0.4.159.exe"
+PackageHash = ""
+
+[SoftwareInfo]
+Name = "NVIDIA App for Enterprise"
+Icon = "nvidia-app-for-enterprise-logo" # use nvidia-app-for-enterprise-logo.png
+Notes = "The NVIDIA app is the ultimate companion for professionals using NVIDIA RTX™ graphics cards. Optimize your applications with a unified GPU control center, record your desktop in resolutions up to 8K, and discover the latest NVIDIA tools and software. Keep your workstation up to date with automatic alerts for new driver releases, ensuring you always have the latest features and performance enhancements at your fingertips."
+RebootRequired = false
+Recommended = false
+
+[Licensing]
+Setting = "None"
+
+[VersionDetection]
+DetectionMethod = "Display Name"
+
+[VersionDetection.DisplayName]
+SearchMode = "Contains"
+SearchFilter = "NVIDIA App"
+
+[Installation]
+Script = "nvidia-app-for-enterprise-installation-script" # use nvidia-app-for-enterprise-installation-script.ps1
+
+[UpgradeStrategy]
+UpgradeStrategy = "None"
+
+[DynamicVersions]
+UseDynamicVersions = true
+
+[DynamicVersions.UsingDynamicVersions]
+Script = "nvidia-app-for-enterprise-dynamic-version" # use nvidia-app-for-enterprise-dynamic-version.ps1
+
+[RepairStrategy]
+RepairStrategy = "None"
+
+[SoftwareAccessLevel]
+AccessLevel = "All"
+
+[Hidden]
+Hidden = false
+
+[Testing]
+TestRequired = false
