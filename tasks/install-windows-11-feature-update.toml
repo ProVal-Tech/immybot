@@ -1,0 +1,21 @@
+[TaskInfo]
+Name = "Install Windows 11 Feature Update"
+Icon = "install-windows-11-feature-update-logo" #use install-windows-11-feature-update-logo.png
+Notes = "Automates the installation of the latest Windows 11 Feature Update for systems running Windows 10 or Windows 11, with comprehensive pre-checks, maintenance, and validation."
+RunsAgainst = "Computers"
+LimitToOnboarding = false
+ExecuteSerially = false
+AccessLevel = "All"
+Recommended = false
+SuperseededBy = ""
+
+[Integration]
+IntegrationType = ""
+
+[Parameters]
+UseScriptParamBlock = false
+
+[Scripts]
+UseCombinedScript = true
+[Scripts.CombinedScript]
+Script = "install-windows-11-feature-update-combined-script" #use install-windows-11-feature-update-combined-script.ps1
