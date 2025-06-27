@@ -83,6 +83,17 @@ Switch ($Method) {
             }
             #endRegion
 
+            #region Drive Space Check
+            $systemVolume = Get-Volume -DriveLetter $env:SystemDrive[0]
+            if ($systemVolume.SizeRemaining -le 64GB) {
+                throw @"
+Error: The Drive Space health check failed. The drive must have 64GB of free space to perform a Feature Update.
+Current available space on $($env:SystemDrive[0]): $([math]::round($systemVolume.SizeRemaining / 1GB, 2))
+For more information: https://learn.microsoft.com/en-us/troubleshoot/windows-client/deployment/windows-10-upgrade-quick-fixes?toc=%2Fwindows%2Fdeployment%2Ftoc.json&bc=%2Fwindows%2Fdeployment%2Fbreadcrumb%2Ftoc.json#verify-disk-space
+"@
+            }
+            #endRegion
+
             #region Compatibility Check
             try {
                 Invoke-WebRequest -Uri $compatibilityCheckScriptDownloadUrl -OutFile $compatibilityCheckScriptPath -UseBasicParsing -ErrorAction Stop
