@@ -66,6 +66,7 @@ Switch ($Method) {
             #endRegion
 
             #region Working Directory
+            Remove-Item -Path $workingDirectory -Force -Cofirm:$false -ErrorAction SilentlyContinue
             if ( !(Test-Path -Path $workingDirectory) ) {
                 try {
                     New-Item -Path $workingDirectory -ItemType Directory -Force -ErrorAction Stop | Out-Null
