@@ -18,6 +18,7 @@ Switch ($Method) {
             #region Variables
             $osVersionCheckUrl = 'https://content.provaltech.com/attachments/windows-os-support.json'
             #endRegion
+            
             #region Test
             try {
                 $iwr = Invoke-WebRequest -Uri $osVersionCheckUrl -UseBasicParsing -ErrorAction Stop
@@ -43,6 +44,7 @@ Switch ($Method) {
             $ConfirmPreference = 'None'
             [Net.ServicePointManager]::SecurityProtocol = [Enum]::ToObject([Net.SecurityProtocolType], 3072)
             #endRegion
+
             #region Initial Verification
             if ((Get-CimInstance -ClassName win32_battery).BatteryStatus -eq 1) {
                 throw 'The Computer battery is not charging please plug in the charger.'
@@ -56,6 +58,7 @@ Switch ($Method) {
 
             #region Variables
             $projectName = 'Install-Windows11FeatureUpdate'
+            $tableName = 'Windows11LatestFeatureUpdate'
             $workingDirectory = '{0}\_automation\script\{1}' -f $env:ProgramData, $projectName
             $baseUrl = 'https://file.provaltech.com/repo'
             $ps1Url = '{0}/script/{1}.ps1' -f $baseUrl, $projectName
@@ -66,7 +69,7 @@ Switch ($Method) {
             #endRegion
 
             #region Working Directory
-            Remove-Item -Path $workingDirectory -Force -Cofirm:$false -ErrorAction SilentlyContinue
+            Remove-Item -Path $workingDirectory -Recurse -Force -Confirm:$false -ErrorAction SilentlyContinue
             if ( !(Test-Path -Path $workingDirectory) ) {
                 try {
                     New-Item -Path $workingDirectory -ItemType Directory -Force -ErrorAction Stop | Out-Null
@@ -83,7 +86,7 @@ Switch ($Method) {
                 Set-Acl -Path $workingDirectory -AclObject $Acl
             }
             #endRegion
-
+            
             #region Drive Space Check
             $systemVolume = Get-Volume -DriveLetter $env:SystemDrive[0]
             if ($systemVolume.SizeRemaining -le 64GB) {
@@ -116,6 +119,23 @@ Minimum system requirements: https://www.microsoft.com/en-in/windows/windows-11-
                 exit 1
             }
             #endRegion
+
+            #region reset StoredTableInfo
+            Get-PackageProvider -Name NuGet -ForceBootstrap -ErrorAction SilentlyContinue | Out-Null
+            Set-PSRepository -Name PSGallery -InstallationPolicy Trusted -ErrorAction SilentlyContinue
+            try {
+                Update-Module -Name Strapper -ErrorAction Stop
+            } catch {
+                Install-Module -Name Strapper -Repository PSGallery -SkipPublisherCheck -Force
+                Get-Module -Name Strapper -ListAvailable | Where-Object { $_.Version -ne (Get-InstalledModule -Name Strapper).Version } | ForEach-Object { Uninstall-Module -Name Strapper -MaximumVersion $_.Version }
+            }
+            (Import-Module -Name 'Strapper') 3>&1 2>&1 1>$null
+            Set-StrapperEnvironment
+            $storedData = @{
+                PrimaryTaskExecuted = 0
+            }
+            $storedData | Write-StoredObject -TableName $tableName -Clobber -WarningAction SilentlyContinue -Depth 2 -ErrorAction SilentlyContinue
+            #endregion
 
             #region Download
             try {
