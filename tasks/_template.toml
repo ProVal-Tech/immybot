@@ -7,7 +7,7 @@ LimitToOnboarding = false
 ExecuteSerially = false
 AccessLevel = "Owner / Limited / All"
 Recommended = false
-SuperseededBy = ""
+SupersededBy = ""
 
 [Integration]
 IntegrationType = ""
