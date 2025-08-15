@@ -1,0 +1,24 @@
+[TaskInfo]
+Name = "Initialize Dell Command | Configure"
+Icon = "initialize-dell-command-configure.png" # Use initialize-dell-command-configure.png
+Notes = """
+Automates installation, update, and execution of Dell Command | Configure (DCC) on Dell workstations, ensuring the latest version is present and providing command-line automation for DCC operations for Dell workstations BIOS configurations.
+Dell Command | Configure CLI Reference: https://www.dell.com/support/manuals/en-us/command-configure-v4.2/dcc_cli_4.2/bios-options?guid=guid-44c059be-b76d-4b2f-b8ef-655f736c40ce&lang=en-us
+"""
+RunsAgainst = "Computers"
+LimitToOnboarding = false
+ExecuteSerially = false
+AccessLevel = "All"
+Recommended = false
+SupersededBy = ""
+
+[Integration]
+IntegrationType = ""
+
+[Parameters]
+UseScriptParamBlock = true
+
+[Scripts]
+UseCombinedScript = true
+[Scripts.CombinedScript]
+Script = "initialize-dell-command-configure-combined-script" # Use initialize-dell-command-configure-combined-script.ps1
