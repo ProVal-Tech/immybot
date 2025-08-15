@@ -11,7 +11,7 @@ PackageHash = ""
 
 [SoftwareInfo]
 Name = "PDFill FREE PDF Editor Basic"
-Icon = "pdfill-logo" # use pdfill-logo.png
+Icon = "pdfill-logo" # use pdfill-logo.png"
 Notes = "You can use the Free PDF Tools to merge, split, reorder, delete, encrypt, decrypt, rotate, crop, and reformat PDF pages, add information/header/footer/watermark, convert image to PDF or PDF to image,  scan a Paper to PDF, and more."
 RebootRequired = false
 Recommended = false
