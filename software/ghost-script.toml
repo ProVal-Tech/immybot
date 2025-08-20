@@ -19,10 +19,11 @@ Recommended = false
 Setting = "None"
 
 [VersionDetection]
-DetectionMethod = "Upgrade Code"
+DetectionMethod = "Display Name"
 
-[VersionDetection.UpgradeCode]
-UpgradeCode = "86faec72-ea3e-4380-ba1b-52f4ae87cd4c"
+[VersionDetection.DisplayName]
+SearchMode = "Contains"
+SearchFilter = "GhostScript"
 
 [Installation]
 Script = "Default MSI Install"
@@ -32,6 +33,12 @@ Script = "Uninstall MSI By UpgradeCode"
 
 [UpgradeStrategy]
 UpgradeStrategy = "Install Over"
+
+[DynamicVersions]
+UseDynamicVersions = True
+
+[DynamicVersions.UsingDynamicVersions]
+Script = "ghost-script-dynamic-versions-script.ps1" # Use ghost-script-dynamic-versions-script.ps1
 
 [RepairStrategy]
 RepairStrategy = "Uninstall/Install"

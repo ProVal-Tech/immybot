@@ -20,10 +20,11 @@ Recommended = false
 Setting = "None"
 
 [VersionDetection]
-DetectionMethod = "Upgrade Code"
+DetectionMethod = "Display Name"
 
-[VersionDetection.UpgradeCode]
-UpgradeCode = "cf2db133-dfbc-43f0-bc25-4052db63af22"
+[VersionDetection.DisplayName]
+SearchMode = "Contains"
+SearchFilter = "PDFill FREE PDF Editor"
 
 [Installation]
 Script = "Default MSI Install"
@@ -45,6 +46,12 @@ Script = "Uninstall MSI By UpgradeCode"
 
 [UpgradeStrategy]
 UpgradeStrategy = "Install Over"
+
+[DynamicVersions]
+UseDynamicVersions = True
+
+[DynamicVersions.UsingDynamicVersions]
+Script = "pdfill-free-pdf-editor-basic-dynamic-versions-script.ps1" # Use pdfill-free-pdf-editor-basic-dynamic-versions-script.ps1
 
 [RepairStrategy]
 RepairStrategy = "Uninstall/Install"
