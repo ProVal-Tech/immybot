@@ -1,3 +1,13 @@
+<#
+    Name = "PDFill FREE PDF Editor Basic Dynamic Versions Script"
+    Type: "Dynamic Versions"
+    Execution Context: "Cloud Script"
+    Language: "PowerShell"
+    Override Timeout: "false"
+    Access Level: "All"
+
+#>
+
 $URL = 'https://www.plotsoft.com/download/PDFill_FREE_PDF_Editor_Basic.msi'
 $Result = Get-DynamicVersionFromInstallerURL $URL
 $Response = New-Object PSObject -Property @{
