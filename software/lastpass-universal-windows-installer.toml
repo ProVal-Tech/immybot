@@ -1,0 +1,38 @@
+[Installer]
+InstallerType = "Upload"
+
+[Installer.Upload]
+InstallerFile = "LastPassInstaller.msi"
+PackageType = "Single file installer"
+
+[Installer.Upload.SingleFileInstaller]
+InstallerFile = "LastPassInstaller.msi"
+PackageHash = "A3D637E582542371D7FF8AA417B70798"
+
+[SoftwareInfo]
+Name = "LastPass Universal Windows Installer"
+Icon = "lastpass.png"
+Notes = "LastPass is a password management service that helps users securely store and manage their passwords and other sensitive information"
+RebootRequired = false
+Recommended = false
+
+[Licensing]
+Setting = "None"
+
+[VersionDetection]
+DetectionMethod = "Display Name"
+
+[VersionDetection.DisplayName]
+SearchMode = "Regex"
+SearchFilter = "Lastpass Universal Windows Installer"
+
+
+[Installation]
+Script = "lastPass-universal-windows-installation-script.ps1"
+
+
+[Uninstallation]
+Script = "lastPass-universal-windows-uninstallation-script.ps1"
+
+[UpgradeStrategy]
+UpgradeStrategy = "Install Over"
