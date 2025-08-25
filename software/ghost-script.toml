@@ -1,0 +1,53 @@
+[Installer]
+InstallerType = "URL"
+
+[Installer.URL]
+InstallerURL = "https://www.plotsoft.com/download/GS_Lite.msi"
+PackageType = "Single file installer"
+
+[Installer.URL.SingleFileInstaller]
+InstallerFile = "https://www.plotsoft.com/download/GS_Lite.msi"
+PackageHash = ""
+
+[SoftwareInfo]
+Name = "GhostScript (Lite)"
+Notes = "Ghostscript offers native rendering and conversion of all major page description languages to raster and vector files, as well as ASCII text"
+RebootRequired = false
+Recommended = false
+
+[Licensing]
+Setting = "None"
+
+[VersionDetection]
+DetectionMethod = "Display Name"
+
+[VersionDetection.DisplayName]
+SearchMode = "Contains"
+SearchFilter = "GhostScript"
+
+[Installation]
+Script = "Default MSI Install"
+
+[Uninstallation]
+Script = "Uninstall MSI By UpgradeCode"
+
+[UpgradeStrategy]
+UpgradeStrategy = "Install Over"
+
+[DynamicVersions]
+UseDynamicVersions = True
+
+[DynamicVersions.UsingDynamicVersions]
+Script = "ghost-script-dynamic-versions-script.ps1" # Use ghost-script-dynamic-versions-script.ps1
+
+[RepairStrategy]
+RepairStrategy = "Uninstall/Install"
+
+[SoftwareAccessLevel]
+AccessLevel = "All"
+
+[Hidden]
+Hidden = false
+
+[Testing]
+TestRequired = false

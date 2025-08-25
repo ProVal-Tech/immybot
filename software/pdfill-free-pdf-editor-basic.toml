@@ -1,0 +1,66 @@
+[Installer]
+InstallerType = "URL"
+
+[Installer.URL]
+InstallerURL = "https://www.plotsoft.com/download/PDFill_FREE_PDF_Editor_Basic.msi"
+PackageType = "Single file installer"
+
+[Installer.URL.SingleFileInstaller]
+InstallerFile = "https://www.plotsoft.com/download/PDFill_FREE_PDF_Editor_Basic.msi"
+PackageHash = ""
+
+[SoftwareInfo]
+Name = "PDFill FREE PDF Editor Basic"
+Icon = "pdfill-logo" # use pdfill-logo.png"
+Notes = "You can use the Free PDF Tools to merge, split, reorder, delete, encrypt, decrypt, rotate, crop, and reformat PDF pages, add information/header/footer/watermark, convert image to PDF or PDF to image,  scan a Paper to PDF, and more."
+RebootRequired = false
+Recommended = false
+
+[Licensing]
+Setting = "None"
+
+[VersionDetection]
+DetectionMethod = "Display Name"
+
+[VersionDetection.DisplayName]
+SearchMode = "Contains"
+SearchFilter = "PDFill FREE PDF Editor"
+
+[Installation]
+Script = "Default MSI Install"
+
+[InstallationPrerequisites]
+
+[InstallationPrerequisites.Software.1]
+Software = "GhostScript (Lite)"
+Is = "Not Installed"
+
+[InstallationPrerequisites.Software.1.NotInstalled]
+Then = "Install"
+
+[InstallationPrerequisites.Software.1.NotInstalled.Install]
+Software = "GhostScript (Lite)"
+
+[Uninstallation]
+Script = "Uninstall MSI By UpgradeCode"
+
+[UpgradeStrategy]
+UpgradeStrategy = "Install Over"
+
+[DynamicVersions]
+UseDynamicVersions = True
+
+[DynamicVersions.UsingDynamicVersions]
+Script = "pdfill-free-pdf-editor-basic-dynamic-versions-script.ps1" # Use pdfill-free-pdf-editor-basic-dynamic-versions-script.ps1
+
+[RepairStrategy]
+RepairStrategy = "Uninstall/Install"
+
+[SoftwareAccessLevel]
+AccessLevel = "All"
+
+[Hidden]
+Hidden = false
+
+[Testing]
+TestRequired = false
