@@ -1,13 +1,9 @@
 [Installer]
-InstallerType = "Upload"
+InstallerType = "URL"
 
-[Installer.Upload]
-InstallerFile = "LastPassInstaller.msi"
+[Installer.URL]
+InstallerURL = "https://download.cloud.lastpass.com/windows_installer/LastPassInstaller.msi"
 PackageType = "Single file installer"
-
-[Installer.Upload.SingleFileInstaller]
-InstallerFile = "LastPassInstaller.msi"
-PackageHash = "A3D637E582542371D7FF8AA417B70798"
 
 [SoftwareInfo]
 Name = "LastPass Universal Windows Installer"
@@ -36,3 +32,15 @@ Script = "lastPass-universal-windows-uninstallation-script.ps1"
 
 [UpgradeStrategy]
 UpgradeStrategy = "Install Over"
+
+[DynamicVersions]
+UseDynamicVersions = True
+
+[DynamicVersions.UsingDynamicVersions]
+Script = "lastPass-installer-dynamic-version-script.ps1"
+
+[SoftwareAccessLevel]
+AccessLevel = "All"
+
+[Hidden]
+Hidden = false
