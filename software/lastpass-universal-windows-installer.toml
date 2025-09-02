@@ -1,0 +1,46 @@
+[Installer]
+InstallerType = "URL"
+
+[Installer.URL]
+InstallerURL = "https://download.cloud.lastpass.com/windows_installer/LastPassInstaller.msi"
+PackageType = "Single file installer"
+
+[SoftwareInfo]
+Name = "LastPass Universal Windows Installer"
+Icon = "lastpass.png"
+Notes = "LastPass is a password management service that helps users securely store and manage their passwords and other sensitive information"
+RebootRequired = false
+Recommended = false
+
+[Licensing]
+Setting = "None"
+
+[VersionDetection]
+DetectionMethod = "Display Name"
+
+[VersionDetection.DisplayName]
+SearchMode = "Regex"
+SearchFilter = "Lastpass Universal Windows Installer"
+
+
+[Installation]
+Script = "lastPass-universal-windows-installation-script.ps1"
+
+
+[Uninstallation]
+Script = "lastPass-universal-windows-uninstallation-script.ps1"
+
+[UpgradeStrategy]
+UpgradeStrategy = "Install Over"
+
+[DynamicVersions]
+UseDynamicVersions = True
+
+[DynamicVersions.UsingDynamicVersions]
+Script = "lastPass-installer-dynamic-version-script.ps1"
+
+[SoftwareAccessLevel]
+AccessLevel = "All"
+
+[Hidden]
+Hidden = false
