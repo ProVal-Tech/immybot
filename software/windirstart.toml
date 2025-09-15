@@ -1,0 +1,39 @@
+[Installer]
+InstallerType = "URL"
+
+[Installer.URL]
+InstallerURL = ""
+PackageType = "Zip file / Single file installer"
+
+[Installer.URL.SingleFileInstaller]
+InstallerFile = "https://github.com/windirstat/windirstat/releases/latest/download/WinDirStat-x64.msi"
+
+[SoftwareInfo]
+Name = "WinDirStat"
+Icon = "windirstat-logo.png"
+Notes = "WinDirStat (Windows Directory Statistics) is a free, open-source disk usage analyzer for Microsoft Windows that visually shows you what files and folders are taking up the most space on your hard drive"
+RebootRequired = false
+Recommended = false
+
+[Licensing]
+Setting = "None"
+
+
+[VersionDetection]
+DetectionMethod = "Display Name"
+
+[VersionDetection.DisplayName]
+SearchMode = "Regex"
+SearchFilter = "WinDirStat"
+
+[Installation]
+Script = "windirstat-installation.ps1"
+
+[Uninstallation]
+Script = "windirstat-uninstallation"
+
+[DynamicVersions]
+UseDynamicVersions = True
+
+[DynamicVersions.UsingDynamicVersions]
+Script = "windirstat-dynamic-version.ps1"
