@@ -1,0 +1,39 @@
+[Installer]
+InstallerType = "URL"
+
+[Installer.URL]
+InstallerURL = "https://github.com/Belphemur/SoundSwitch/releases/download/v6.14.2/SoundSwitch_v6.14.2.0_Release_Installer.exe"
+PackageType = "Single file installer"
+
+[Installer.URL.SingleFileInstaller]
+InstallerFile = "SoundSwitch_v6.14.1.0_Release_Installer"
+
+[SoftwareInfo]
+Name = "SoundSwitch"
+Icon = "SoundSwitch.jpg"
+Notes = "SoundSwitch is a software and hardware system for creating and controlling automated, synchronized lighting shows with DJ music"
+RebootRequired = false
+Recommended = false
+
+[Licensing]
+Setting = "None"
+
+
+[VersionDetection]
+DetectionMethod = "Display Name"
+
+[VersionDetection.DisplayName]
+SearchMode = "contains"
+SearchFilter = "SoundSwitch"
+
+[Installation]
+Script = "soundswitch-installation.ps1"
+
+[Uninstallation]
+Script = "soundswitch-installation.ps1"
+
+[DynamicVersions]
+UseDynamicVersions = True
+
+[DynamicVersions.UsingDynamicVersions]
+Script = "soundswitch-dynamic-versions.ps1"
