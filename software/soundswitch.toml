@@ -6,7 +6,7 @@ InstallerURL = "https://github.com/Belphemur/SoundSwitch/releases/download/v6.14
 PackageType = "Single file installer"
 
 [Installer.URL.SingleFileInstaller]
-InstallerFile = "SoundSwitch_v6.14.1.0_Release_Installer"
+InstallerFile = "SoundSwitch_v6.14.1.0_Release_Installer.exe"
 
 [SoftwareInfo]
 Name = "SoundSwitch"
@@ -31,6 +31,9 @@ Script = "soundswitch-installation.ps1"
 
 [Uninstallation]
 Script = "soundswitch-installation.ps1"
+
+[UpgradeStrategy]
+UpgradeStrategy = "Install Over"
 
 [DynamicVersions]
 UseDynamicVersions = True
