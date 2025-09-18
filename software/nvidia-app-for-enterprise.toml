@@ -6,7 +6,7 @@ InstallerURL = ""
 PackageType = "Single file installer"
 
 [Installer.URL.SingleFileInstaller]
-InstallerFile = "https://us.download.nvidia.com/nvapp/client/11.0.4.159/NVIDIA_app_v11.0.4.159.exe"
+InstallerFile = "https://us.download.nvidia.com/nvapp/client/11.0.5.245/NVIDIA_app_v11.0.5.245.exe"
 PackageHash = ""
 
 [SoftwareInfo]
@@ -30,7 +30,7 @@ SearchFilter = "NVIDIA App"
 Script = "nvidia-app-for-enterprise-installation-script" # use nvidia-app-for-enterprise-installation-script.ps1
 
 [UpgradeStrategy]
-UpgradeStrategy = "None"
+UpgradeStrategy = "Install Over"
 
 [DynamicVersions]
 UseDynamicVersions = true
@@ -39,7 +39,7 @@ UseDynamicVersions = true
 Script = "nvidia-app-for-enterprise-dynamic-version" # use nvidia-app-for-enterprise-dynamic-version.ps1
 
 [RepairStrategy]
-RepairStrategy = "None"
+RepairStrategy = "Install Over"
 
 [SoftwareAccessLevel]
 AccessLevel = "All"
