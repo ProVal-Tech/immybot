@@ -1,0 +1,54 @@
+[Installer]
+InstallerType = "URL"
+
+[Installer.URL]
+InstallerURL = "https://www.mapilab.com/files/mmt-x64-msi.zip"
+PackageType = "Zip file"
+
+[Installer.URL.ZipFile]
+InstallerExecutablePath = "/Mail Merge Toolkit (x64).msi"
+PackageHash = ""
+
+[SoftwareInfo]
+Name = "Mail Merge Toolkit"
+Icon = "Mail-Merge-Toolkit.png"
+Notes = "Mail Merge Toolkit is a powerful add-in for Microsoft Office extending the mail merging capabilities in Microsoft Outlook, Microsoft Word and Microsoft Publisher. This app allows you to realize really personalized mass mailing easily and efficiently by providing a set of requested and unique features"
+RebootRequired = false
+Recommended = false
+
+[Licensing]
+Setting = "None / Required / Optional"
+
+[VersionDetection]
+DetectionMethod = "Display Name"
+
+[VersionDetection.DisplayName]
+SearchMode = "Contains"
+SearchFilter = "Mail Merge Toolkit"
+
+[Installation]
+Script = "Mail Merge Toolkit Installation Script" # Use mail-merge-toolkit-install.ps1
+
+[Uninstallation]
+Script = "Mail Merge Toolkit Uninstall Script" # Use mail-merge-toolkit-uninstall.ps1
+
+[UpgradeStrategy]
+UpgradeStrategy = "Install Over"
+
+[DynamicVersions]
+UseDynamicVersions = True
+
+[DynamicVersions.UsingDynamicVersions]
+Script = "Mail Merge Toolkit Dynamic Versions Script" # Use mail-merge-toolkit-dynamic-versions-script.ps1
+
+[RepairStrategy]
+RepairStrategy = "Uninstall/Install"
+
+[SoftwareAccessLevel]
+AccessLevel = "All"
+
+[Hidden]
+Hidden = false
+
+[Testing]
+TestRequired = false
