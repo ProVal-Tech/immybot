@@ -1,0 +1,44 @@
+[Installer]
+InstallerType = "URL"
+
+[Installer.URL]
+InstallerURL = "https://desktop.wifiman.com/wifiman-desktop-1.1.3-amd64.exe"
+PackageType = "Single file installer"
+
+[SoftwareInfo]
+Name = "WiFiman Desktop"
+Icon = "wifiman-desktop.jpg" # Use the wifiman-desktop.jpg file
+Notes = "WiFiman Desktop is a network analysis, discovery, and optimization tool by Ubiquiti for Windows, macOS, and Linux that provides network speed tests, signal strength monitoring, device discovery, and easy access to your UniFi network via the TeleportVPN feature."
+RebootRequired = false
+Recommended = false
+
+[Licensing]
+Setting = "None"
+
+[VersionDetection]
+DetectionMethod = "Display Name"
+
+[VersionDetection.DisplayName]
+SearchMode = "Regex"
+SearchFilter = "WiFiman Desktop"
+
+[Installation]
+Script = "wifiman-desktop-installation.ps1"
+
+[Uninstallation]
+Script = "wifiman-desktop-uninstallation.ps1"
+
+[UpgradeStrategy]
+UpgradeStrategy = "Install Over"
+
+[DynamicVersions]
+UseDynamicVersions = True
+
+[DynamicVersions.UsingDynamicVersions]
+Script = "wifiman-desktop-dynamic-versions.ps1"
+
+[SoftwareAccessLevel]
+AccessLevel = "All"
+
+[Hidden]
+Hidden = false
