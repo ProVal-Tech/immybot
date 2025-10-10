@@ -17,7 +17,7 @@ RebootRequired = false
 Recommended = false
 
 [Licensing]
-Setting = "None / Required / Optional"
+Setting = "None"
 
 [VersionDetection]
 DetectionMethod = "Display Name"
