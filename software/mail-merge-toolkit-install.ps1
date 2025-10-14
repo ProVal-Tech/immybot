@@ -1,2 +1,3 @@
 $InstallerFile = $InstallerFolder + "\Mail Merge Toolkit (x64).msi"
-Install-MSI -Path $InstallerFile
+msiexec /i “$InstallerFile” /qn
+Start-Sleep -Seconds 10

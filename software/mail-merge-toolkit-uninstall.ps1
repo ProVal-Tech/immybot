@@ -1,1 +1,3 @@
-msiexec /x "{B008D66F-B796-4C06-B707-932F0B225531}" /qn
+$InstallerFile = $InstallerFolder + "\Mail Merge Toolkit (x64).msi"
+msiexec /x “$InstallerFile” /qn
+Start-Sleep -Seconds 10

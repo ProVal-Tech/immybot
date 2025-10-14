@@ -12,7 +12,8 @@ PackageHash = ""
 [SoftwareInfo]
 Name = "Mail Merge Toolkit"
 Icon = "Mail-Merge-Toolkit.png"
-Notes = "Mail Merge Toolkit is a powerful add-in for Microsoft Office extending the mail merging capabilities in Microsoft Outlook, Microsoft Word and Microsoft Publisher. This app allows you to realize really personalized mass mailing easily and efficiently by providing a set of requested and unique features"
+Notes = "Please note that deploying this plugin will restart Microsoft Office applications if they are currently open. 
+Mail Merge Toolkit is a powerful add-in for Microsoft Office extending the mail merging capabilities in Microsoft Outlook, Microsoft Word and Microsoft Publisher. This app allows you to realize really personalized mass mailing easily and efficiently by providing a set of requested and unique features. "
 RebootRequired = false
 Recommended = false
 
@@ -27,10 +28,10 @@ SearchMode = "Contains"
 SearchFilter = "Mail Merge Toolkit"
 
 [Installation]
-Script = "Mail Merge Toolkit Installation Script" # Use mail-merge-toolkit-install.ps1
+Script = "Mail Merge Toolkit Installation Script" # Use mail-merge-toolkit-install.ps1 and set to run as user
 
 [Uninstallation]
-Script = "Mail Merge Toolkit Uninstall Script" # Use mail-merge-toolkit-uninstall.ps1
+Script = "Mail Merge Toolkit Uninstall Script" # Use mail-merge-toolkit-uninstall.ps1 and set to run as user
 
 [UpgradeStrategy]
 UpgradeStrategy = "Install Over"
