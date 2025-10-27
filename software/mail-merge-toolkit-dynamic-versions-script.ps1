@@ -1,0 +1,6 @@
+$URL = 'https://www.mapilab.com/files/mmt-x64-msi.zip'
+$Result = Get-DynamicVersionFromInstallerURL $URL
+$Response = New-Object PSObject -Property @{
+    Versions = @(New-DynamicVersion -URL $URL -Version $Result.Versions.Version)
+}
+return $Response
