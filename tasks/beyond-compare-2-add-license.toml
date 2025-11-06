@@ -1,0 +1,27 @@
+[TaskInfo]
+Name = "Beyond Compare 2 Add License"
+Icon = "../software/beyond-compare-2.png"
+Notes = ""
+RunsAgainst = "Software (Configuration Task)"
+LimitToOnboarding = false
+ExecuteSerially = false
+AccessLevel = "All"
+Recommended = false
+SupersededBy = ""
+
+[Parameters]
+UseScriptParamBlock = false
+
+[Parameters.1]
+Name = "LicenseString"
+Type = "Text"
+RequiresUserInput = true
+Hidden = false
+DefaultValue = ""
+Description = ""
+
+[Scripts]
+UseCombinedScript = true
+
+[Scripts.CombinedScript]
+Script = "beyond-compare-2-add-license.ps1"
