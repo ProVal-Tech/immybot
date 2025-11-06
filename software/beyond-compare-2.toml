@@ -1,0 +1,39 @@
+[Installer]
+InstallerType = "URL"
+
+[Installer.URL]
+InstallerURL = "https://www.scootersoftware.com/files/beycomp_081407.exe"
+PackageType = "Single file installer"
+
+[Installer.URL.SingleFileInstaller]
+InstallerFile = "beycomp_081407.exe"
+PackageHash = ""
+
+[SoftwareInfo]
+Name = "Beyond Compare 2"
+Icon = "beyond-compare-2.png"
+Notes = "This is an older version of Beyond Compare.  It is provided here for those who have a license to version 2.x and have not upgraded."
+RebootRequired = false
+Recommended = false
+
+[Licensing]
+Setting = "None"
+
+[VersionDetection]
+DetectionMethod = "Display Name"
+
+[VersionDetection.DisplayName]
+SearchMode = "Regex"
+SearchFilter = 'Beyond Compare Version (2\.\d\.\d)'
+
+[Installation]
+Script = "Inno Setup Default Install Script (Global)"
+
+[UpgradeStrategy]
+UpgradeStrategy = "Install Over"
+
+[ConfigurationTask]
+Task = "Beyond Compare 2 Add License"
+
+[PostInstallation]
+Script = "sleep-5-seconds.ps1"
