@@ -1,3 +1,4 @@
+# Execution Context: User
 $regPath = "HKCU:\Software\Scooter Software\Beyond Compare"
 switch ($Method) {
     'Test' {
