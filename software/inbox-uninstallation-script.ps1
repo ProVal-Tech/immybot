@@ -1,6 +1,6 @@
 <#
 Script Details:
-    Name = inbox-uninstallation-script
+    Name = Inbox Uninstallation Script
     Type = Software Version Action
     Execution Context = User
     Language = PowerShell

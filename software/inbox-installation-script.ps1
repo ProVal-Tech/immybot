@@ -1,6 +1,6 @@
 <#
 Script Details:
-    Name = inbox-installation-script
+    Name = Inbox Installation Script
     Type = Software Version Action
     Execution Context = User
     Language = PowerShell

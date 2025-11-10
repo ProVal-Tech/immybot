@@ -1,6 +1,6 @@
 <#
 Script Details:
-    Name = inbox-custom-detection-script
+    Name = Inbox Custom Detection Script
     Type = Software Detection
     Execution Context = User
     Language = PowerShell

@@ -1,6 +1,6 @@
 <#
 Script Details:
-    Name = inbox-dynamic-version-script
+    Name = Inbox Dynamic Version Script
     Type = Dynamic Versions
     Execution Context = Cloud Script
     Language = PowerShell
