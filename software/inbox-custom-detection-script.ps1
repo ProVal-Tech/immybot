@@ -7,4 +7,4 @@ Script Details:
     Override timeout = false
     Access Level = All
 #>
-(Get-ItemProperty -Path 'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\dfc9f961-94d9-5e1d-9a8e-e1c16464d416' -Name DisplayVersion -ErrorAction SilentlyContinue).DisplayVersion
+(Get-ChildItem 'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\' -ErrorAction SilentlyContinue | Get-ItemProperty | Where-Object { $_.DisplayName -Match '^Inbox' } ).DisplayVersion
