@@ -1,0 +1,71 @@
+[Installer]
+InstallerType = "URL"
+
+[Installer.URL]
+InstallerURL = "https://inbox.chatgenie.io/downloads/desktop/inbox.exe"
+PackageType = "Single file installer"
+
+[Installer.URL.SingleFileInstaller]
+InstallerFile = "inbox.exe"
+PackageHash = ""
+
+[SoftwareInfo]
+Name = "Inbox"
+Icon = "inbox.svg" # use inbox-icon.svg
+Notes = "https://www.getthread.com/inbox"
+RebootRequired = false
+Recommended = false
+
+[Licensing]
+Setting = "None"
+
+[VersionDetection]
+DetectionMethod = "Custom Detection Script"
+
+[VersionDetection.CustomDetectionScript]
+CustomDetectionScript = "inbox-custom-detection-script" # use inbox-custom-detection-script.ps1
+
+[Installation]
+Script = "inbox-installation-script" # use inbox-installation-script.ps1
+
+[Uninstallation]
+Script = "inbox-uninstallation-script" # use inbox-uninstallation-script.ps1
+
+[UpgradeStrategy]
+UpgradeStrategy = "Install Over"
+
+[ConfigurationTask]
+Task = ""
+
+[DynamicVersions]
+UseDynamicVersions = true
+
+[DynamicVersions.UsingDynamicVersions]
+Script = "inbox-dynamic-version-script" # use inbox-dynamic-version-script.ps1
+
+[AgentIntegration]
+AgentIntegration = ""
+
+[RepairStrategy]
+RepairStrategy = "Uninstall/Install"
+
+[SoftwareAccessLevel]
+AccessLevel = "All"
+
+[Hidden]
+Hidden = false
+
+[PostInstallation]
+Script = ""
+
+[PostUninstallation]
+Script = ""
+
+[Testing]
+TestRequired = false
+
+[AutoUpdate]
+Script = ""
+
+[DownloadInstaller]
+Script = ""
